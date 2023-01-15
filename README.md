@@ -13,7 +13,7 @@
 
 ```
 
-- **tdwnsv3** is [Python](https://python.org) program for hosting local-files on net (***LAN***).
+**tdwnsv3** is [Python](https://python.org) program for hosting local-files on net (***LAN***).
 
 
 ## Independencies  ##
@@ -42,7 +42,7 @@ $ bash install.sh
 
 ## Usage ##
 
-- `$ tdwnsv` will fire up the server with the following default configurations:
+`$ tdwnsv` will fire up the server with the following default configurations:
 
 <table style='text-align:center;'>
 <thead>
@@ -70,8 +70,8 @@ $ bash install.sh
 
 ## wsgi ##
 
-- Since Flask server runs at development environment, you may need to run the program on a server such as [Nginx](https://nginx.org) for efficiency.
-- The [wsgi](wsgi.py) script can be interfaced with **wsgi** such as **uwsgi** to run behind a *server* .
+Since Flask server runs at development environment, you may need to run the program on a server such as [Nginx](https://nginx.org) for efficiency.
+The [wsgi](wsgi.py) script can be interfaced with **wsgi** such as **uwsgi** to run behind a *server* .
  * For  instance intergrating with `uwsgi` as stated in [docs](https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html) :
  
  ```
