@@ -1,3 +1,5 @@
+# tdwnsv3 #
+
 ```
 
 '########:'########::'##:::::'##:'##::: ##::'######::'##::::'##::'#######::
@@ -11,9 +13,7 @@
 
 ```
 
-# tdwnsv3 #
-
-- **tdwnsv3** is [Python](https://python.org) program for hosting local-files on net. ***LAN***.
+- **tdwnsv3** is [Python](https://python.org) program for hosting local-files on net (***LAN***).
 
 
 ## Independencies  ##
@@ -21,7 +21,7 @@
 * Flask
 * cryptography
 
-- Preview [requirements](requirements.txt)
+Review [requirements](requirements.txt)
 
 ## installation ##
  
@@ -42,9 +42,9 @@ $ bash install.sh
 
 ## Usage ##
 
-- `tdwnsv` will fire up the server with the following default configurations:
+- `$ tdwnsv` will fire up the server with the following default configurations:
 
-<table>
+<table style='text-align:center;'>
 <thead>
 <tr><th>Command  </th><th style="text-align: right;">  Default</th></tr>
 </thead>
@@ -62,7 +62,7 @@ $ bash install.sh
 - Adding ```--sort``` to the commands parsed  will prettify the display. i.e
  
  ```
- tdwnsv3 --sort 
+ $ tdwnsv3 --sort 
 
  ```
 
@@ -76,7 +76,7 @@ $ bash install.sh
  
  ```
 
-uwsgi --http=0.0.0.0:8080 -w wsgi:app
+$ uwsgi --http=0.0.0.0:8080 -w wsgi:app
 
 ```
 
