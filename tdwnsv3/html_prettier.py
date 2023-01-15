@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+import os,urllib,html
+def prettify(contents:list,path:str,dir:str,args:object,config:dict,encryptor:object) -> str:
+        r=[]
+        enc='utf-8'
+        static=config['static']
+        fmtlink=lambda uri:encryptor.handle_cipher(uri,enc=True,path=os.path.join(dir,uri))[1]
+        folders,videos,audios,photos,programs,documents,etc=[],[],[],[],[],[],[]
+        
+        title = '<span style="color:cyan;">Directory </span>%s' %dir
+        r.append('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" '
+                 '"http://www.w3.org/TR/html4/strict.dtd">')
+        r.append('<html><head>')
+        r.append('<meta http-equiv="Content-Type" '
+                 'content="text/html; charset=%s"></meta>' % enc)
+        r.append('<meta content="width=width-device, initial-scale=1.0" name="viewport"></meta>' 
+                  f'<link rel="icon" type="image/x-icon" href="/{static}/favicon.ico"></link>'
+                  f'<link rel="stylesheet" href="/{static}/style/style.css"></link>'
+                  f'<script type="text/javascript" src="/{static}/javascript/script.js"></script>')
+        r.append('<title>Directory %s</title></head>' % path)
+        r.append('<body><h1>%s</h1><hr/>' % title)
+        
+        preload='none'
+        if args.preload:
+        	preload='metadata'
+        for name in contents:
+            fullname = os.path.join(path, name)
+            displayname = linkname = name
+            # Append / for directories or @ for symbolic links
+            if os.path.isdir(fullname):
+                displayname = name + "/"
+                linkname = name + "/"
+            if os.path.islink(fullname):
+                displayname = name + "@"
+                # Note: a link to a directory displays with @ and links with /
+            if not args.sort:
+            	if '/' in displayname:
+            		r.append('<p><a class="dir" href="%s">%s</a></p>'% (urllib.parse.quote(linkname,errors='surrogatepass'),html.escape(displayname, quote=False)))
+            	else:
+            		r.append('<p><a class="file" href="%s">%s</a></p>'% (urllib.parse.quote(linkname,errors='surrogatepass'),html.escape(displayname, quote=False)))
+            else:
+            	if '/' in displayname:
+            		displayname=displayname.replace('/','')
+            		folders.append('<button><a class="dir" href="%s">%s</a></button>'% (fmtlink(urllib.parse.quote(linkname,errors='surrogatepass')),html.escape(displayname, quote=False)))
+            	else:
+            		link=fmtlink(urllib.parse.quote(linkname,errors='surrogatepass'))
+            		linknm=html.escape(displayname, quote=False)
+            		if len(linknm)>30:linknm=linknm[0:30]+'...'
+            		if displayname.endswith(('mp4','3gpp','mkv','3gp')):
+            			rp=f'''<div id='info' class='vida'><p class='doc'>{linknm}</p>
+            			<video preload='{preload}' controls>
+            			<source src="{link}" type="video/mp4"></video>{'<br>'*2}</div>'''
+            			videos.append(rp)
+            		elif displayname.endswith(('jpg','jpeg','png','img','webm','gif')):
+            			rp=f'''<div id='info' class='pic'><p class='doc'>{linknm}</p><img height='auto' width='auto' src='{link}' alt='{linknm}'/></div>'''
+            			photos.append(rp)
+            		elif displayname.endswith(('mp3','wav','m4a')):
+            			rp=f'''<div id='info' class='aud'><p class='doc'>{linknm}</p><audio controls>
+            			<source src="{link}" type="audio/mp3">
+            			</audio></div>'''
+            			audios.append(rp)
+            		elif displayname.endswith(('.py','.c','.html','.css','.cxx','.js','.xml','.htm','.pl','.yaml','.sh','.bash','.zsh','.bat','.rst','.cpp','.php','.jar','.jv','.config','.json','.dat','.conf','.resolv','yml','.rb','.ini','.apk','.exe','.deb')):
+            			programs.append('<li class="doc"><a class="file" href="%s">%s</a></li>'% (link,linknm))
+            		elif displayname.endswith(('pdf','docx','csv','txt','md','db','bin','xlsx')):
+            			documents.append('<li class="doc"><a class="file" href="%s">%s</a></li>'% (link,linknm))
+            		else:
+            			etc.append('<li class="doc"><a class="file" href="%s">%s</a></li>'% (link,linknm))
+            
+            	if name==contents[len(contents)-1]:
+            		dt=[folders,videos,audios,photos,programs,documents,etc]
+            		tl=lambda a:f'<h3>{a}</h3>'
+            		hd=['Folders','Videos','Audios','Photos','Programs','Documents','Etcs']
+            		for x in range(len(dt)):
+            			if dt[x]:
+            				dt[x].sort()
+            				r.append(tl(hd[x]))
+            				if x==0:
+            					r.append('<div class="folders">')
+            				if x==1:r.append('''<input id='cp' type='search' name='me' placeholder='Search videos in this folder...' onkeyup='query()'></input>''')
+            				r.extend(dt[x])
+            				if x==0:
+            					r.append('</div>')
+        r.append(f'''
+		<marquee>You can upload files to this folder.</marquee>
+       <form method='POST' action='/{config['upload']}' enctype="multipart/form-data" onsubmit='return notify()'>
+       <input type='file' id='bin' name='{config['data_name']}'/>
+       <input type='hidden' name='{config['folder_name']}' value='{path}'/>
+       <input type='submit' value='Upload'/>
+       </form>''' if args.upload else '')   					        
+        r.append('''<hr><footer>
+		 <a class='but' href='#' target='self' onclick='refresh()'>Refresh Page</a>
+        <!--<h4>Regards bc03</h4> -->
+        <p style="color:red;font-size:160%;font-family:cursive;">Regards bc03</p></footer>
+       ''');r.append('</body></html>');return ''.join(r)
