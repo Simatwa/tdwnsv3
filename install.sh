@@ -1,25 +1,23 @@
 #!/bin/bash
+apt-get install python3
 D1='/data/data/com.termux/files/usr/bin'
+nm='tdwnsv3'
 
 if [[ -d  "$D1" ]]; then
     DIR="$D1"
 else
     DIR='/usr/bin'
-fi  
-
-if [[ -f "$DIR"/python ]]; then
-      python setup.py sdist
-
-else
-      apt-get install python3
-      python3 setup.py sdist
 fi 
 
-cp main.py "$DIR"/tdwnsv3
+python setup.py install
 
-chmod +x "$DIR"/tdwnsv3
+ex="$DIR"/"$nm"
 
-echo 'tdwnsv3 installed successfully!'
+cp main.py "$ex"
+
+chmod +x "$ex"
+
+echo "$nm" 'installed successfully!'
 
 sleep 2 && clear
 

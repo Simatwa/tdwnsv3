@@ -153,7 +153,7 @@ def config_app():
 				try:
 					os.makedirs(pth)
 				except Exception as e:
-					logging.error(f'Failed to create "{pth} - {e}')
+					log.error(f'Failed to create "{pth} - {e}')
 		app.config['UPLOAD_PATH']=pth
 		log.debug(f'Upload path - {pth}')
 	if args.upload_extension:
