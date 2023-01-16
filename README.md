@@ -19,6 +19,7 @@
 
 * Flask
 * cryptography
+* appdirs
 
 Review [requirements](requirements.txt)
 
