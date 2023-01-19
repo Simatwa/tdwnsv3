@@ -1,4 +1,4 @@
-''''
+"""'
 MIT License
 
 Copyright (c) 2023 Simatwa Caleb
@@ -20,8 +20,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-'''
-data='''
+"""
+data = """
 h1{
        height:auto;
         color:yellow;
@@ -161,9 +161,9 @@ a.but{
         font-family:verdana;
     }
       
-            '''
+            """
 
-data1='''
+data1 = """
 body{
     background-color:antiquewhite;
     text-align:center;
@@ -288,65 +288,78 @@ footer{
     background-color:lightseagreen;
     padding:10px;
     bottom:0;
-}'''
+}"""
+
+
 class style_handler:
-	def __init__(self,log:object,args:object):
-		self.val=args.theme
-		self.fnm=args.css
-		self.log=log
-		self.args=args
-		self.css_data=[]
-		self.css_is_saved=[]
-		if not self.args.debug:
-			self.css_data.append(self.css())
-	def get_root_dir(self) -> str:
-		from appdirs import AppDirs
-		dirs=AppDirs('bc03','flask_file_server')
-		return dirs.user_data_dir
-	#Saves the css data for future use
-	def save_css_data(self,style:str) -> None:
-		root=self.get_root_dir()
-		if root:
-			self.log.debug(f'Saving css data  to {root+self.fnm}')
-			self.css_is_saved.append(True)
-			try:
-				from os import path,makedirs
-				if not path.isdir(root):
-					makedirs(root)
-				with open(path.join(root,self.fnm),'w') as file:
-					file.write(style)
-			except Exception as e:
-				self.log.error(f'Failed to save CSS "{self.fnm}" - {e}')
-	#Opens the css file
-	def open_file(self,notify=True) -> str:
-		try:
-			with open(self.fnm) as file:
-				rp=(True,file.read())
-			if self.args.save_css and not self.css_is_saved:
-				self.save_css_data(rp[1])
-		except Exception as e:
-			if notify:
-				self.log.error(f'Failed to open CSS file "{self.fnm}" - {e}')
-			rp=(False,e)
-		return rp
-	#Opens previous saved data
-	def open_cache(self):
-		try:
-			with open(self.get_root_dir()+'/'+self.fnm) as fp:
-				return fp.read()
-		except:pass
-	#Main method
-	def css(self) -> str:
-		if self.css_data:
-			return self.css_data[0]
-		else:
-			if self.fnm:
-				cache=self.open_cache()
-				if cache and not self.args.no_cache:
-					self.log.debug(f'Serving css from cache of {self.fnm}')
-					return cache
-				fp=self.open_file()
-				if fp[0]:
-					return fp[1]
-			css1={ 1 : data,2 : data1,}
-			return css1[self.val]                                                                                  
+    def __init__(self, log: object, args: object):
+        self.val = args.theme
+        self.fnm = args.css
+        self.log = log
+        self.args = args
+        self.css_data = []
+        self.css_is_saved = []
+        if not self.args.debug:
+            self.css_data.append(self.css())
+
+    def get_root_dir(self) -> str:
+        from appdirs import AppDirs
+
+        dirs = AppDirs("bc03", "flask_file_server")
+        return dirs.user_data_dir
+
+    # Saves the css data for future use
+    def save_css_data(self, style: str) -> None:
+        root = self.get_root_dir()
+        if root:
+            self.log.debug(f"Saving css data  to {root+self.fnm}")
+            self.css_is_saved.append(True)
+            try:
+                from os import path, makedirs
+
+                if not path.isdir(root):
+                    makedirs(root)
+                with open(path.join(root, self.fnm), "w") as file:
+                    file.write(style)
+            except Exception as e:
+                self.log.error(f'Failed to save CSS "{self.fnm}" - {e}')
+
+    # Opens the css file
+    def open_file(self, notify=True) -> str:
+        try:
+            with open(self.fnm) as file:
+                rp = (True, file.read())
+            if self.args.save_css and not self.css_is_saved:
+                self.save_css_data(rp[1])
+        except Exception as e:
+            if notify:
+                self.log.error(f'Failed to open CSS file "{self.fnm}" - {e}')
+            rp = (False, e)
+        return rp
+
+    # Opens previous saved data
+    def open_cache(self):
+        try:
+            with open(self.get_root_dir() + "/" + self.fnm) as fp:
+                return fp.read()
+        except:
+            pass
+
+    # Main method
+    def css(self) -> str:
+        if self.css_data:
+            return self.css_data[0]
+        else:
+            if self.fnm:
+                cache = self.open_cache()
+                if cache and not self.args.no_cache:
+                    self.log.debug(f"Serving css from cache of {self.fnm}")
+                    return cache
+                fp = self.open_file()
+                if fp[0]:
+                    return fp[1]
+            css1 = {
+                1: data,
+                2: data1,
+            }
+            return css1[self.val]
