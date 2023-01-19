@@ -25,8 +25,8 @@ SOFTWARE.
 import argparse, os
 
 info = "Simple local-files server with security as main priority!"
-__version__ = "1.8"
-__developer__ = "Simatwa"
+__version__ = "1.8.0"
+__author__ = "Simatwa"
 
 
 def args_handler():
