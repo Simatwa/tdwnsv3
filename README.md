@@ -85,8 +85,8 @@ $ uwsgi --http=0.0.0.0:8080 -w wsgi:app
 ```
 usage: tdwnsv3 [-h] [-v] [-d DIR] [-a ALLOW] [-r RESTRICT] [-w WHITELIST] [-b BLACKLIST] [-t SPLIT] [-s 1 to 10] [-l 1 to 5] [-o LOG]
                [-ho HOME] [-st STATIC] [-up RECEIVE] [-se SESSION] [-th [1,2]] [-cs CSS] [-upp UPLOAD_PATH] [-upe UPLOAD_EXTENSION]
-               [-ups UPLOAD_SIZE] [-upl upload_limit] [--host] [--sort] [--aggressive] [--view] [--strict] [--preload] [--upload]
-               [--save-css] [--no-cache] [--encrypt] [--debug]
+               [-ups UPLOAD_SIZE] [-upl upload_limit] [--upload-multiple] [--host] [--sort] [--aggressive] [--view] [--strict]
+               [--preload] [--upload] [--save-css] [--no-cache] [--encrypt] [--debug]
                [port]
 
 Simple local-files server with security as main priority!
@@ -132,6 +132,7 @@ optional arguments:
                         Maximum file size to be uploaded - [MB]
   -upl upload_limit, --upload-limit-person upload_limit
                         Maximum files to be uploaded per IP
+  --upload-multiple     Allow users to upload more than one file at a time.
   --host                Host the files on the LAN
   --sort                Prettify the display of the contents
   --aggressive          Filter all entries with the restricted keywords
@@ -140,10 +141,9 @@ optional arguments:
   --preload             Load videos before clicked
   --upload              Allow users to upload files
   --save-css            Saves the css data in path for future use
-  --no-cache            Use currently parsed parameters not previously saved
+  --no-cache            Use currently passed parameters not previously saved
   --encrypt             Encrypt URIs on the webpage
   --debug               Debug the web application in UI mode
-
 ```
 
 
