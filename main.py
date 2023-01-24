@@ -139,6 +139,12 @@ def args_handler():
         metavar="upload_limit",
         dest="upload_limit_person",
     )
+    parser.add_argument(
+        "--upload-multiple",
+        help="Allow users to upload more than one file at a time.",
+        action="store_true",
+        dest="upload_multiple",
+    )
     parser.add_argument("--host", help="Host the files on the LAN", action="store_true")
     parser.add_argument(
         "--sort", help="Prettify the display of the contents", action="store_true"
@@ -531,41 +537,62 @@ def path_handler(path):
 def upload():
     if not args.upload:
         abort(401)
-    binary = request.files[config.get("data_name")]
+
     folder = (
         request.form[config.get("folder_name")]
         if not args.upload_path
         else args.upload_path
     )
-    try:
+    response_data = {"saved": 0, "code": 501, "msg": "Internal server-error!"}
+    all_files = request.files.getlist(config.get("data_name"))
+    if not args.upload_multiple and len(all_files) > 1:
+        abort(413)
+    for binary in all_files:
         try:
-            count = upload_counter[get_real_ip()]
-        except:
-            count = 1
-            upload_counter[get_real_ip()] = count
-        if args.upload_path:
-            folder = app.config["UPLOAD_PATH"]
-        fnm = secure_filename(binary.filename)
-        path = os.path.join(folder, fnm)
-        if upload_counter[get_real_ip()] > args.upload_limit_person:
-            abort(413)
-        if args.upload_extension:
-            splt = os.path.splitext(fnm)
-            if len(splt) > 1 and splt[1] in app.config["UPLOAD_EXTENSIONS"]:
-                pass
-            else:
-                abort(400)
-        upload_counter[get_real_ip()] = count + 1
-        binary.save(path)
-    except Exception as e:
-        msg, code = f"Failed to save file! {e}", 501
-    else:
-        msg, code = (
-            f"File uploaded succesfully! {fnm} {args.upload_limit_person-count} upload space remaining!",
-            200,
-        )
-    finally:
-        return respond_to_user(alert(msg, reload=True if code == 200 else False)), code
+            try:
+                count = upload_counter[get_real_ip()]
+            except:
+                count = 1
+                upload_counter[get_real_ip()] = count
+            if args.upload_path:
+                folder = app.config["UPLOAD_PATH"]
+            fnm = secure_filename(binary.filename)
+            path = os.path.join(folder, fnm)
+            if upload_counter[get_real_ip()] > args.upload_limit_person:
+                abort(413)
+            if args.upload_extension:
+                splt = os.path.splitext(fnm)
+                if len(splt) > 1 and splt[1] in app.config["UPLOAD_EXTENSIONS"]:
+                    pass
+                else:
+                    abort(400)
+            upload_counter[get_real_ip()] = count + 1
+            binary.save(path)
+        except Exception as e:
+            msg, code, saved = (
+                f"Failed to save file! {e} Files saved [{response_data['saved']}]",
+                501,
+                0,
+            )
+        else:
+            msg, code, saved = (
+                f"File uploaded succesfully! {fnm} ({args.upload_limit_person-count}) upload space remaining! Files saved [{response_data['saved']+1}]",
+                200,
+                1,
+            )
+        finally:
+            response_data["msg"] = msg
+            response_data["code"] = code
+            response_data["saved"] = response_data["saved"] + saved
+    return (
+        respond_to_user(
+            alert(
+                response_data["msg"],
+                reload=True if response_data["code"] == 200 else False,
+            )
+        ),
+        response_data["code"],
+    )
 
 
 if __name__ == "__main__":
