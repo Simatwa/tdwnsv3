@@ -23,10 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import argparse, os
-
-info = "Simple local-files server with security as main priority!"
-__version__ = "1.8.0"
-__author__ = "Simatwa"
+from tdwnsv3 import info, __author__, __version__
 
 
 def args_handler():
