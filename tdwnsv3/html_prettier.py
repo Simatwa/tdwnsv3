@@ -200,7 +200,7 @@ def prettify(
         f"""
 		<marquee>You can upload files to this folder.</marquee>
        <form method='POST' action='/{config['upload']}' enctype="multipart/form-data" onsubmit='return notify()'>
-       <input {'multiple' if args.upload_multiple else ''} type='file' id='bin' name='{config['data_name']}'/>
+       <input  {'multiple' if args.upload_multiple else ''} type='file' id='bin' name='{config['data_name']}'/>
        <input type='hidden' name='{config['folder_name']}' value='{path}/'>
        <input type='submit' value='Upload'/>
        </form>"""
