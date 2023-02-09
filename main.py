@@ -596,7 +596,7 @@ if __name__ == "__main__":
     log.debug("Server configured ready to start!")
     try:
         if args.host:
-            app.run(host="0.0.0.0", port=args.port, debug=args.debug)
+            app.run(host="0.0.0.0", port=args.port, debug=args.debug,threaded=True)
         else:
             app.run(port=args.port, debug=args.debug)
     except Exception as e:
