@@ -142,6 +142,12 @@ def args_handler():
         action="store_true",
         dest="upload_multiple",
     )
+    parser.add_argument(
+        "--display-hidden",
+        dest="display_hidden",
+        action="store_true",
+        help="Show hidden files and directories",
+    )
     parser.add_argument("--host", help="Host the files on the LAN", action="store_true")
     parser.add_argument(
         "--no-sort",
@@ -330,6 +336,10 @@ def unauthorised(e):
 # Controls all the restriction_params
 def remove_restricted(entries: list) -> list:
     address, rp = request.remote_addr, []
+    if not args.display_hidden:
+        for entry in entries.copy():
+            if entry.startswith("."):
+                entries.remove(entry)
     if args.strict:
         if address in whitelist:
             rp = entries
@@ -505,6 +515,8 @@ def path_handler(path):
             abort(404)
     path1 = os.path.join(dir, path)
     if remove_restricted([path1]) or path == "home":
+        if not args.display_hidden and path.split("/")[-1].startswith("."):
+            abort(401)
         if os.path.isfile(path1):
             return respond_to_user(send_file(path1))
         elif os.path.isdir(path1):
