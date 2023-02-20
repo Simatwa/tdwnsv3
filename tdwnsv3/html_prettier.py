@@ -75,7 +75,7 @@ def prettify(
         if os.path.islink(fullname):
             displayname = name + "@"
             # Note: a link to a directory displays with @ and links with /
-        if not args.sort:
+        if args.no_sort:
             if "/" in displayname:
                 r.append(
                     '<p><a class="dir" href="%s">%s</a></p>'
@@ -211,7 +211,7 @@ def prettify(
         """<hr><footer>
 		 <a class='but' href='#' target='self' onclick='refresh()'>Refresh Page</a>
         <!--<h4>Regards bc03</h4> -->
-        <p style="color:red;font-size:160%;font-family:cursive;">Regards bc03</p></footer>
+        <p style="color:red;font-size:160%;font-family:cursive;">Regards <a href='https://github.com/Simatwa' target='_blank'>Smartwa</a></p></footer>
        """
     )
     r.append("</body></html>")

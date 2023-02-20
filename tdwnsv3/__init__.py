@@ -22,5 +22,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 info = "Simple local-files server with security as main priority!"
-__version__ = "1.8.0"
+__version__ = "1.8.1"
 __author__ = "Simatwa"

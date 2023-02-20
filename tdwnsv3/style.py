@@ -290,6 +290,150 @@ footer{
     bottom:0;
 }"""
 
+data2 = """
+body{
+    background-color: #f2f2f2;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    text-align:center;
+    
+}
+
+h1{
+    position:sticky;
+    top:0;
+    margin-left:0;
+    margin-right:0;
+    padding:20px;
+    background-color:#fff;
+    clear:both;
+    font-size:1.6rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.header{
+    color: #222;
+    text-decoration: none;
+}
+
+a{
+    text-decoration:none;
+}
+
+div.folders{
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+button{
+    background-color: #f2f2f2;
+    margin: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.dir{
+    color: #222;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: bold;
+}
+
+#cp{
+    background-color: #fff;
+    width: 60%;
+    font-size: 16px;
+    border-radius: 20px;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    padding: 10px;
+    color: #222;
+    border: 1px solid #ddd;
+}
+
+input#cp{
+    text-align: center;
+    padding: 10px;
+    height: 0.2cm;
+}
+
+.vida,.pic,.aud{
+    display: inline-block;
+    margin: 5px;
+    max-width: 340px;
+}
+
+p.doc{
+    display: inline-block;
+    color: #222;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    max-width: 340px;
+}
+
+video{
+    border:none;
+    background-color: 000;
+    border-radius: 4px;
+    width: 100%;
+    height: auto;
+}
+
+img, video{
+    max-width:100%;
+    height: auto;
+    
+}
+
+audio{
+    height: 50px;
+    width:100%;
+}
+
+.aud{
+    background-color: #fff;
+    color: #222;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+li.doc{
+    display: inline-block;
+    color: #222;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 7px;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.but{
+    background-color: #fff;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+marquee{
+    margin:5px;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size:14px;
+    color:#222;
+}
+
+footer{
+  /*  position: fixed; */
+    bottom: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 10px;
+    color: #666;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+}
+"""
+
 
 class style_handler:
     def __init__(self, log: object, args: object):
@@ -315,7 +459,7 @@ class style_handler:
             self.log.debug(f"Saving css data  to {root+self.fnm}")
             self.css_is_saved.append(True)
             try:
-                from os import path, makedirs
+                from os import makedirs, path
 
                 if not path.isdir(root):
                     makedirs(root)
@@ -361,5 +505,6 @@ class style_handler:
             css1 = {
                 1: data,
                 2: data1,
+                3: data2,
             }
             return css1[self.val]

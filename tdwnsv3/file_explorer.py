@@ -22,7 +22,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-import argparse, os
+import argparse
+import os
 
 info = "Simple local-files server with security as main priority!"
 __version__ = "1.8"
@@ -184,20 +185,22 @@ def args_handler():
 
 
 args = args_handler()
+import base64
+import logging as log
+import re
+from sys import argv
+from urllib.parse import unquote
+
+from cryptography.fernet import Fernet
 from flask import *
 from werkzeug.utils import secure_filename
-import logging as log
-from .html_prettier import prettify
-from .style import style_handler
-from .javascript import data as javascript
-from sys import argv
-import base64
-from .fav import data as favicon
-from .sec_server import credentials, new_cookie, verifiers
-import re
-from cryptography.fernet import Fernet
+
 from .ciphersuite import encryption
-from urllib.parse import unquote
+from .fav import data as favicon
+from .html_prettier import prettify
+from .javascript import data as javascript
+from .sec_server import credentials, new_cookie, verifiers
+from .style import style_handler
 
 
 def log_modify_handler():
