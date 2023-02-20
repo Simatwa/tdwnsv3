@@ -144,7 +144,10 @@ def args_handler():
     )
     parser.add_argument("--host", help="Host the files on the LAN", action="store_true")
     parser.add_argument(
-        "--no-sort", dest='no_sort',help="Disable prettifying the display of contents", action="store_true"
+        "--no-sort",
+        dest="no_sort",
+        help="Disable prettifying the display of contents",
+        action="store_true",
     )
     parser.add_argument(
         "--aggressive",
@@ -596,7 +599,7 @@ if __name__ == "__main__":
     log.debug("Server configured ready to start!")
     try:
         if args.host:
-            app.run(host="0.0.0.0", port=args.port, debug=args.debug,threaded=True)
+            app.run(host="0.0.0.0", port=args.port, debug=args.debug, threaded=True)
         else:
             app.run(port=args.port, debug=args.debug)
     except Exception as e:
