@@ -9,7 +9,7 @@ else
     DIR='/usr/bin'
 fi 
 
-python setup.py install
+python3 setup.py install
 
 ex="$DIR"/"$nm"
 

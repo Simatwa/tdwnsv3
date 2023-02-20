@@ -349,6 +349,7 @@ button{
     padding: 10px;
     color: #222;
     border: 1px solid #ddd;
+    /* display:none; */
 }
 
 input#cp{
@@ -360,7 +361,7 @@ input#cp{
 .vida,.pic,.aud{
     display: inline-block;
     margin: 5px;
-    max-width: 340px;
+    max-width: 320px;
 }
 
 p.doc{
@@ -369,6 +370,12 @@ p.doc{
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     max-width: 340px;
 }
+
+/*
+.vida{
+    max-width:320px;
+
+} */
 
 video{
     border:none;
@@ -395,6 +402,7 @@ audio{
     padding: 10px;
     margin-top: 10px;
     border: 1px solid #ddd;
+    min-width:300px;
 }
 
 li.doc{

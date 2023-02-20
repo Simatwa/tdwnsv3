@@ -43,7 +43,7 @@ $ bash install.sh
 
 ## Usage ##
 
-`$ tdwnsv` will fire up the server with the following default configurations:
+`$ tdwnsv3` will fire up the server with the following default configurations:
 
 <table style='text-align:center;'>
 <thead>
@@ -52,20 +52,15 @@ $ bash install.sh
 <tbody>
 <tr><td>host     </td><td style="text-align: right;">    False</td></tr>
 <tr><td>port     </td><td style="text-align: right;">     8000</td></tr>
-<tr><td>sort     </td><td style="text-align: right;">    False</td></tr>
-<tr><td>theme    </td><td style="text-align: right;">        2</td></tr>
+<tr><td>no-sort     </td><td style="text-align: right;">   False</td></tr>
+<tr><td>theme    </td><td style="text-align: right;">        3</td></tr>
 <tr><td>upload   </td><td style="text-align: right;">    False</td></tr>
 <tr><td>encrypt  </td><td style="text-align: right;">    False</td></tr>
 <tr><td>session  </td><td style="text-align: right;">    False</td></tr>
 </tbody>
 </table>
 
-- Adding ```--sort``` to the commands parsed  will prettify the display. i.e
- 
- ```
- $ tdwnsv3 --sort 
-
- ```
+![Web interface sample](assets/web_interface_example.png)
 
 * *This is just a shallow display of the default configurations.*
 
@@ -84,10 +79,14 @@ $ uwsgi --http=0.0.0.0:8080 -w wsgi:app
 - Run  ```tdwnsv3 -h``` to view more configuration info as shown.
 
 ```
-usage: tdwnsv3 [-h] [-v] [-d DIR] [-a ALLOW] [-r RESTRICT] [-w WHITELIST] [-b BLACKLIST] [-t SPLIT] [-s 1 to 10] [-l 1 to 5] [-o LOG]
-               [-ho HOME] [-st STATIC] [-up RECEIVE] [-se SESSION] [-th [1,2]] [-cs CSS] [-upp UPLOAD_PATH] [-upe UPLOAD_EXTENSION]
-               [-ups UPLOAD_SIZE] [-upl upload_limit] [--upload-multiple] [--host] [--sort] [--aggressive] [--view] [--strict]
-               [--preload] [--upload] [--save-css] [--no-cache] [--encrypt] [--debug]
+usage: tdwnsv3 [-h] [-v] [-d DIR] [-a ALLOW] [-r RESTRICT] [-w WHITELIST]
+               [-b BLACKLIST] [-t SPLIT] [-s 1 to 10] [-l 1 to 5] [-o LOG]
+               [-ho HOME] [-st STATIC] [-up RECEIVE] [-se SESSION] [-th [1-3]]
+               [-cs CSS] [-upp UPLOAD_PATH] [-upe UPLOAD_EXTENSION]
+               [-ups UPLOAD_SIZE] [-upl upload_limit] [--upload-multiple]
+               [--display-hidden] [--host] [--no-sort] [--aggressive] [--view]
+               [--strict] [--preload] [--upload] [--save-css] [--no-cache]
+               [--encrypt] [--debug]
                [port]
 
 Simple local-files server with security as main priority!
@@ -104,11 +103,13 @@ optional arguments:
   -r RESTRICT, --restrict RESTRICT
                         Hide entries from being viewed
   -w WHITELIST, --whitelist WHITELIST
-                        IP(s) to be excluded from restrictions - default : None
+                        IP(s) to be excluded from restrictions - default :
+                        None
   -b BLACKLIST, --brownlist BLACKLIST
                         IP(s) to be imposed the restrictions - default : all
   -t SPLIT, --split SPLIT
-                        Separator for the entries allowed/restricted - default [,]
+                        Separator for the entries allowed/restricted - default
+                        [,]
   -s 1 to 10, --secure 1 to 10
                         Level of security on contents
   -l 1 to 5, --level 1 to 5
@@ -122,7 +123,7 @@ optional arguments:
                         Upload host subdomain path
   -se SESSION, --session SESSION
                         Maximum session time per user - (mins)
-  -th [1,2], --theme [1,2]
+  -th [1-3], --theme [1-3]
                         Theme for displaying contents
   -cs CSS, --css CSS    Customize webpage with the CSS in path
   -upp UPLOAD_PATH, --upload-path UPLOAD_PATH
@@ -134,17 +135,20 @@ optional arguments:
   -upl upload_limit, --upload-limit-person upload_limit
                         Maximum files to be uploaded per IP
   --upload-multiple     Allow users to upload more than one file at a time.
+  --display-hidden      Show hidden files and directories
   --host                Host the files on the LAN
-  --sort                Prettify the display of the contents
+  --no-sort             Disable prettifying the display of contents
   --aggressive          Filter all entries with the restricted keywords
   --view                Files can be seen but can't be downloaded
-  --strict              Only allow whitelisted & brownlisted IPs to access server!
+  --strict              Only allow whitelisted & brownlisted IPs to access
+                        server!
   --preload             Load videos before clicked
   --upload              Allow users to upload files
   --save-css            Saves the css data in path for future use
   --no-cache            Use currently passed parameters not previously saved
   --encrypt             Encrypt URIs on the webpage
   --debug               Debug the web application in UI mode
+
 ```
 
 

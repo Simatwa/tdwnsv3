@@ -191,7 +191,7 @@ def prettify(
                             r.append('<div class="folders">')
                         if x == 1:
                             r.append(
-                                """<input id='cp' type='search' name='me' placeholder='Search videos in this folder...' onkeyup='query()'></input>"""
+                                """<div><input id='cp' type='search' name='me' placeholder='Search videos in this folder...' onkeyup='query()'></input></div>"""
                             )
                         r.extend(dt[x])
                         if x == 0:
