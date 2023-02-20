@@ -102,9 +102,9 @@ def args_handler():
         "--theme",
         help="Theme for displaying contents",
         type=int,
-        choices=[1, 2],
-        metavar="[1,2]",
-        default=2,
+        choices=[1, 2, 3],
+        metavar="[1-3]",
+        default=3,
     )
     parser.add_argument("-cs", "--css", help="Customize webpage with the CSS in path")
     parser.add_argument(
@@ -144,7 +144,7 @@ def args_handler():
     )
     parser.add_argument("--host", help="Host the files on the LAN", action="store_true")
     parser.add_argument(
-        "--sort", help="Prettify the display of the contents", action="store_true"
+        "--no-sort", dest='no_sort',help="Disable prettifying the display of contents", action="store_true"
     )
     parser.add_argument(
         "--aggressive",
