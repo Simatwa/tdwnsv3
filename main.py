@@ -238,7 +238,7 @@ def verify_dir(dir):
 dir = verify_dir(args.dir)
 
 html_style = style_handler(log, args)
-javascript=javascript(args).data
+javascript = javascript(args).data
 restricted = args.restrict.split(args.split)
 log.debug(f"Restricted paths  - {restricted}")
 allowed = args.allow.split(args.split)

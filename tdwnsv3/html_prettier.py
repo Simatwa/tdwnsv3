@@ -59,7 +59,7 @@ def prettify(
         f'<link rel="stylesheet" href="/{static}/style/style.css"></link>'
         f'<script type="text/javascript" src="/{static}/javascript/script.js"></script>'
     )
-    r.append("<title>Directory %s</title></head>" % path)
+    r.append("<title>Directory %s</title></head>" % dir)
     r.append("<body><h1>%s</h1><hr/>" % title)
 
     preload = "none"

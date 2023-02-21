@@ -21,10 +21,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+
+
 class data:
-     def __init__(self,args:object):
-          self.args=args
-          self.data = """
+    def __init__(self, args: object):
+        self.args = args
+        self.data = """
  function query()
  {
        let input=document.getElementById('cp').value;
@@ -61,4 +63,6 @@ function notify()
 			}
 	}
 	
-	"""%('inline-block' if self.args.theme==3 else 'list-item')
+	""" % (
+            "inline-block" if self.args.theme == 3 else "list-item"
+        )
