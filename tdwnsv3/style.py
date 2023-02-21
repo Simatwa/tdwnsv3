@@ -403,6 +403,7 @@ audio{
     margin-top: 10px;
     border: 1px solid #ddd;
     min-width:300px;
+    max-width:300px;
 }
 
 li.doc{

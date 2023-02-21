@@ -208,10 +208,9 @@ def prettify(
         else ""
     )
     r.append(
-        """<hr><footer>
+        """<hr><div class="container"><footer>
 		 <a class='but' href='#' target='self' onclick='refresh()'>Refresh Page</a>
-        <!--<h4>Regards bc03</h4> -->
-        <p style="color:red;font-size:160%;font-family:cursive;">Regards <a href='https://github.com/Simatwa' target='_blank'>Smartwa</a></p></footer>
+        <p style="color:red;font-size:160%;font-family:cursive;">Regards <a href='https://github.com/Simatwa' target='_blank'>Smartwa</a></p></footer></div>
        """
     )
     r.append("</body></html>")
