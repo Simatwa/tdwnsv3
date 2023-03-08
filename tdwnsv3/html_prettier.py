@@ -112,7 +112,9 @@ def prettify(
             			<video preload='{preload}' controls>
             			<source src="{link}" type="video/mp4"></video>{'<br>'*2}</div>"""
                     videos.append(rp)
-                elif displayname.endswith(("jpg", "jpeg", "png", "img", "webm", "gif")):
+                elif displayname.endswith(
+                    ("jpg", "jpeg", "png", "img", "webm", "gif", "svg")
+                ):
                     rp = f"""<div id='info' class='pic'><p class='doc'>{linknm}</p><img height='auto' width='auto' src='{link}' alt='{linknm}'/></div>"""
                     photos.append(rp)
                 elif displayname.endswith(("mp3", "wav", "m4a")):
