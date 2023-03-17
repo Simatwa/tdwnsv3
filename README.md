@@ -14,7 +14,7 @@
 
 > Host local-files on net (***LAN***).
 
-[![wakatime](https://wakatime.com/badge/user/321c8a21-57bc-4782-bb00-8733ff579c0d/project/8ee238c6-df24-42d9-90f0-5fae11a242f3.svg)](https://wakatime.com/badge/user/321c8a21-57bc-4782-bb00-8733ff579c0d/project/8ee238c6-df24-42d9-90f0-5fae11a242f3)
+[![wakatime](https://wakatime.com/badge/github/Simatwa/svinf3.svg)](https://wakatime.com/badge/github/Simatwa/svinf3)
 
 ## Independencies  ##
 
