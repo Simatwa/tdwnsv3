@@ -251,13 +251,14 @@ secu = args.secure
 log.debug(f"Security level {args.secure}")
 config = credentials(args.secure)
 cookie_jar, first_cookie, upload_counter = {}, {}, {}
+key_one, key_two = new_cookie(6), new_cookie(7)
 sec_headers = {
     "X-Frame-Options": "DENY, SAMEORIGIN",
     "X-XSS-Protection": "1; mode=block",
     "X-Content-Type-Options": "nosniff",
     "X-Permitted-Cross-Domain-Policies": "none",
     "Content-Security-Policy": "base-uri 'self'; block-all-mixed-content;",
-    "Cache-Control": "max-age=120",
+    "Cache-Control": "no-cache",
     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
     "Access-Control-Allow-Credentials": "true",
     "Referrer-Policy": "same-origin",
@@ -289,6 +290,8 @@ encryption_key = Fernet.generate_key()
 if args.secure < 6:
     log.debug(f'Encryption key  "{encryption_key.decode()}" ')
 encryptor = encryption(encryption_key, args, config)
+
+get_cookie = lambda v: request.cookies.get(v)
 
 app = Flask(__name__)
 
@@ -426,7 +429,6 @@ def soup_restrict(entries: list) -> list:
                 if val.lower() in entry.lower():
                     entries.remove(entry)
     else:
-        # print(len(restricted),restricted)
         for val in restricted:
             for entry in entries.copy():
                 if val in entry:
@@ -457,10 +459,10 @@ def wrap_path(abs_path: str, dir: str):
         return rp, code
 
 
-# Verifies if cookie exist and makes response
+# Verifies if cookie exists and makes response
 def respond_to_user(resp):
     try:
-        if not args.restrict or cookie_jar[get_real_ip()] == request.cookies["user_id"]:
+        if not args.restrict or has_login():
             rp = resp
         else:
             rp = abort(401)
@@ -470,10 +472,23 @@ def respond_to_user(resp):
 
 
 # Assign cookie to user
-def add_new_user(ip):
-    cookie_value = new_cookie(48)
-    cookie_jar[ip] = cookie_value
-    return cookie_value
+def add_new_user():
+    """Generates cookie values"""
+    cookie_value1, cookie_value2 = new_cookie(16), new_cookie(32)
+    cookie_jar[cookie_value1] = cookie_value2
+    return cookie_value1, cookie_value2
+
+
+def has_login() -> bool:
+    """Checks if user has login"""
+    rp = False
+    try:
+        if cookie_jar[get_cookie(key_one)] == get_cookie(key_two):
+            rp = True
+    except:
+        pass
+    finally:
+        return rp
 
 
 @app.route("/", methods=["GET"])
@@ -491,8 +506,9 @@ def hidden_dir(file):
                 mimetype="application/javascript",
             )
         )
-        cookie_value = new_cookie(36)
-        first_cookie[get_real_ip()] = cookie_value
+        id, cookie_value = new_cookie(7), new_cookie(36)
+        first_cookie[id] = cookie_value
+        rp.set_cookie("id", id, (args.session * 30))
         rp.set_cookie(config["first"], cookie_value, (args.session * 30))
     else:
         rp = abort(401)
@@ -541,21 +557,26 @@ def path_handler(path):
         else:
             if path == "home":
                 try:
-                    if first_cookie[get_real_ip()] == request.cookies.get(
-                        config["first"]
-                    ):
+                    if first_cookie[get_cookie("id")] == get_cookie(config["first"]):
                         pass
                     else:
                         abort(401)
-                except:
+                except Exception as e:
                     abort(401)
                 else:
                     resp = make_response(wrap_path(dir, path))
-                    resp.set_cookie(
-                        "user_id",
-                        add_new_user(get_real_ip()),
-                        max_age=args.session * 60,
-                    )
+                    if not has_login():
+                        cookie1, cookie2 = add_new_user()
+                        resp.set_cookie(
+                            key_one,
+                            cookie1,
+                            max_age=args.session * 60,
+                        )
+                        resp.set_cookie(
+                            key_two,
+                            cookie2,
+                            max_age=args.session * 60,
+                        )
                     return resp
             abort(404)
     else:
@@ -632,4 +653,4 @@ if __name__ == "__main__":
         else:
             app.run(port=args.port, debug=args.debug)
     except Exception as e:
-        print(e)
+        log.exception(e)
