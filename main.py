@@ -251,6 +251,17 @@ secu = args.secure
 log.debug(f"Security level {args.secure}")
 config = credentials(args.secure)
 cookie_jar, first_cookie, upload_counter = {}, {}, {}
+sec_headers = {
+    "X-Frame-Options": "DENY, SAMEORIGIN",
+    "X-XSS-Protection": "1; mode=block",
+    "X-Content-Type-Options": "nosniff",
+    "X-Permitted-Cross-Domain-Policies": "none",
+    "Content-Security-Policy": "base-uri 'self'; block-all-mixed-content;",
+    "Cache-Control": "max-age=120",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Credentials": "true",
+    "Referrer-Policy": "same-origin",
+}
 
 favicon1 = base64.b64decode(favicon.encode())
 
@@ -310,6 +321,14 @@ def config_app():
 config_app()
 
 
+@app.after_request
+def add_headers(response):
+    if response.status_code in (200, 201, 202, 301, 302, 304):
+        for key, value in sec_headers.items():
+            response.headers[key] = value
+    return response
+
+
 def alert(msg, back=True, reload=False):
     return f'<script>alert("{str(msg)}");{"history.back();" if back else ""}{"window.location.reload();" if reload else ""}</script>'
 
@@ -336,7 +355,7 @@ def unauthorised(e):
 
 # Controls all the restriction_params
 def remove_restricted(entries: list) -> list:
-    address, rp = request.remote_addr, []
+    address, rp = get_real_ip(), []
     if not args.display_hidden:
         for entry in entries.copy():
             if entry.startswith("."):
@@ -441,10 +460,7 @@ def wrap_path(abs_path: str, dir: str):
 # Verifies if cookie exist and makes response
 def respond_to_user(resp):
     try:
-        if (
-            not args.restrict
-            or cookie_jar[request.remote_addr] == request.cookies["user_id"]
-        ):
+        if not args.restrict or cookie_jar[get_real_ip()] == request.cookies["user_id"]:
             rp = resp
         else:
             rp = abort(401)
@@ -476,7 +492,7 @@ def hidden_dir(file):
             )
         )
         cookie_value = new_cookie(36)
-        first_cookie[request.remote_addr] = cookie_value
+        first_cookie[get_real_ip()] = cookie_value
         rp.set_cookie(config["first"], cookie_value, (args.session * 30))
     else:
         rp = abort(401)
