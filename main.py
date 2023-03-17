@@ -143,6 +143,12 @@ def args_handler():
         dest="upload_multiple",
     )
     parser.add_argument(
+        "--disable-aggressive",
+        dest="aggressive",
+        help="Not to - Filter all entries with  the restricted keywords +",
+        action="store_false",
+    )
+    parser.add_argument(
         "--display-hidden",
         dest="display_hidden",
         action="store_true",
@@ -153,11 +159,6 @@ def args_handler():
         "--no-sort",
         dest="no_sort",
         help="Disable prettifying the display of contents",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--aggressive",
-        help="Filter all entries with  the restricted keywords",
         action="store_true",
     )
     parser.add_argument(
@@ -461,14 +462,9 @@ def wrap_path(abs_path: str, dir: str):
 
 # Verifies if cookie exists and makes response
 def respond_to_user(resp):
-    try:
-        if not args.restrict or has_login():
-            rp = resp
-        else:
-            rp = abort(401)
-    except:
-        rp = abort(401)
-    return rp
+    if any([args.aggressive, args.secure >= 4]) and not has_login():
+        abort(401)
+    return resp
 
 
 # Assign cookie to user
