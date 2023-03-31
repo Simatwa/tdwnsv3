@@ -12,8 +12,6 @@
 ```
 # tdwnsv3 #
 
-> Host local-files on net (***LAN***).
-
 <p align="center">
 <a href='https://github.com/Simatwa/tdwnsv3'><img src="https://img.shields.io/static/v1?label=Github&message=Passing&logo=github&color=green" alt="Github" /></a>
 <a href="https://pypi.org/projects/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Pypi&message=v1.8.3&color=yellow&logo=pypi" alt="pypi"/></a>
@@ -21,6 +19,8 @@
 <a href="https://wakatime.com/badge/github/Simatwa/svinf3"><img src="https://wakatime.com/badge/github/Simatwa/svinf3.svg" alt="wakatime"/></a>
 <a href="#"><img src="https://visitor-badge.glitch.me/badge?page_id=Simatwa.tdwnsv3&left_color=red&right_color=lime&left_text=Counts" alt="Visitors"/></a>
 </p>
+
+> Host local-files on net (***LAN***).
 
 ![Web interface sample](https://github.com/Simatwa/tdwnsv3/raw/main/assets/web_interface_example.gif)
 
@@ -39,7 +39,7 @@
 - Fully customized web interface - css
 - Upload and download files
 
-## installation ##
+## Installation 
 
 - Choose your suit from the following ways:
 
@@ -93,7 +93,7 @@ By default, the server fires up with the following configurations:
 
 * *This is just a shallow display of the default configurations.*
 
-## wsgi ##
+## wsgi 
 
 Since Flask server runs at development environment, you may need to run the program on a server such as [Nginx](https://nginx.org) for efficiency.
 
@@ -192,7 +192,7 @@ optional arguments:
 ```
 
 
-## Acknowledgements ##
+## Acknowledgements
 
 * [x] [Flask](https://github.com/pallets/flask) 
 * [x] [Python](https://python.org)
