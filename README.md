@@ -85,7 +85,7 @@ $ python -m tdwnsv3
 Since Flask server runs at development environment, you may need to run the program on a server such as [Nginx](https://nginx.org) for efficiency.
 
 ```py
-from tdwnsv3 import app
+from tdwnsv3.tdwnsv3 import app
 
 if __name__ == "__main__":
     app.run()

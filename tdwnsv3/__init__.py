@@ -26,7 +26,6 @@ __version__ = "1.8.9"
 __author__ = "Smartwa Caleb"
 __email__="smartwacaleb@gmail.com"
 __repo__ = "https://github.com/Simatwa/tdwnsv3"
-from .tdwnsv3 import app
 
 __all__=[
     "tdwnsv3",
