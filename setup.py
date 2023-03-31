@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from tdwnsv3 import info, __version__, __author__
+from tdwnsv3 import __info__ , __version__, __author__ , __repo__
 
 
 def get_file(nm: str) -> list:
@@ -12,11 +12,12 @@ setup(
     packages=find_packages(),
     version=__version__,
     install_requires=get_file("requirements.txt"),
-    url="https://github.com/Simatwa/tdwnsv3",
+    url=__repo__,
+    project_urls={"Bug Report": f"{__repo__}/issues/new"},
     license="MIT",
     author=__author__,
     author_email="simatwaclb@gmail.com",
-    description=info,
+    description=__info__,
     long_description="\n".join(get_file("README.md")),
     long_description_content_type="text/markdown",
     classifiers=[

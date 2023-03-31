@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-info = "Simple local-files server with security as main priority!"
+__info__ = "Simple local-files server with security as main priority!"
 __version__ = "1.8.2"
 __author__ = "Simatwa"
+__repo__ = "https://github.com/Simatwa/tdwnsv3"

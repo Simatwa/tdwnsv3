@@ -23,11 +23,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import argparse, os
-from tdwnsv3 import info, __author__, __version__
+from tdwnsv3 import __info__ , __author__, __version__
 
 
 def args_handler():
-    parser = argparse.ArgumentParser(description=info)
+    parser = argparse.ArgumentParser(description=__info__)
     parser.add_argument(
         "-v",
         "--version",
@@ -323,6 +323,8 @@ def add_headers(response):
     if response.status_code in (200, 201, 202, 301, 302, 304):
         for key, value in sec_headers.items():
             response.headers[key] = value
+    if response.content_type.split(';')[0] in ('application/json','application/xml','text/html'):
+        response.headers['Cache-Control']='must-revalidate; charset=utf-8'
     return response
 
 
