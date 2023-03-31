@@ -8,9 +8,9 @@
 ::: ##:::: ##:::: ##: ##: ##: ##: ##:. ###:'##::: ##::. ## ##:::'##:::: ##:
 ::: ##:::: ########::. ###. ###:: ##::. ##:. ######::::. ###::::. #######::
 :::..:::::........::::...::...:::..::::..:::......::::::...::::::.......:::
-
 ```
-# tdwnsv3 #
+
+<h1 align="center">tdwnsv3 </h1>
 
 <p align="center">
 <a href='https://github.com/Simatwa/tdwnsv3'><img src="https://img.shields.io/static/v1?label=Github&message=Passing&logo=github&color=green" alt="Github" /></a>
@@ -20,7 +20,7 @@
 <a href="#"><img src="https://visitor-badge.glitch.me/badge?page_id=Simatwa.tdwnsv3&left_color=red&right_color=lime&left_text=Counts" alt="Visitors"/></a>
 </p>
 
-> Host local-files on net (***LAN***).
+> Access your files on the web.
 
 ![Web interface sample](https://github.com/Simatwa/tdwnsv3/raw/main/assets/web_interface_example.gif)
 
@@ -74,7 +74,7 @@ $ python -m tdwnsv3
 ```
 2. `$ tdwnsv3`
 
-By default, the server fires up with the following configurations:
+<p align="center">By default, the server fires up with the following configurations:</p>
 
 <table align='center'>
 <thead>
@@ -91,7 +91,7 @@ By default, the server fires up with the following configurations:
 </tbody>
 </table>
 
-* *This is just a shallow display of the default configurations.*
+> **Note** This is just a shallow display of the default configurations.
 
 ## wsgi 
 
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     app.run()
 ```
 
-The [wsgi](https://github.com/Simatwa/tdwnsv3/raw/main/wsgi.py) script can be interfaced with **wsgi** such as **uwsgi** to run behind a *server* .
+The [wsgi.py](https://github.com/Simatwa/tdwnsv3/raw/main/wsgi.py) script can be interfaced with **wsgi** such as **uwsgi** to run behind a *server* .
  * For  instance intergrating with `uwsgi` as stated in [docs](https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html) :
  
  ```

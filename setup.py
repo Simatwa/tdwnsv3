@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from tdwnsv3 import __info__ , __version__, __author__ , __repo__
+from tdwnsv3 import __info__ , __version__, __author__ , __repo__ , __email__
 
 
 def get_file(nm: str) -> list:
@@ -16,7 +16,9 @@ setup(
     project_urls={"Bug Report": f"{__repo__}/issues/new"},
     license="MIT",
     author=__author__,
-    author_email="simatwaclb@gmail.com",
+    author_email=__email__,
+    maintainer=__author__,
+    maintainer_email=__email__,
     description=__info__,
     long_description="\n".join(get_file("README.md")),
     long_description_content_type="text/markdown",
@@ -29,4 +31,9 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
     ],
+    entry_points={
+        'console_scripts':[
+            'tdwnsv3 = tdwnsv3.tdwnsv3:main',
+        ]
+    }
 )

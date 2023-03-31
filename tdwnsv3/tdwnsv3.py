@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import argparse, os
-from tdwnsv3 import __info__ , __author__, __version__
+from . import __info__ , __author__, __version__
 
 
 def args_handler():
@@ -193,16 +193,16 @@ args = args_handler()
 from flask import *
 from werkzeug.utils import secure_filename
 import logging as log
-from tdwnsv3.html_prettier import prettify
-from tdwnsv3.style import style_handler
-from tdwnsv3.javascript import data as javascript
+from .html_prettier import prettify
+from .style import style_handler
+from .javascript import data as javascript
 from sys import argv
 import base64
-from tdwnsv3.fav import data as favicon
-from tdwnsv3.sec_server import credentials, new_cookie, verifiers
+from .fav import data as favicon
+from .sec_server import credentials, new_cookie, verifiers
 import re
 from cryptography.fernet import Fernet
-from tdwnsv3.ciphersuite import encryption
+from .ciphersuite import encryption
 from urllib.parse import unquote
 
 
@@ -635,8 +635,7 @@ def upload():
         response_data["code"],
     )
 
-
-if __name__ == "__main__":
+def main():
     log.debug("Server configured ready to start!")
     try:
         if args.host:
@@ -645,3 +644,6 @@ if __name__ == "__main__":
             app.run(port=args.port, debug=args.debug)
     except Exception as e:
         log.exception(e)
+
+if __name__ == "__main__":
+    main()
