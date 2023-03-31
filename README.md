@@ -1,8 +1,7 @@
 <h1 align="center">tdwnsv3</h1>
-
 <p align="center">
 <a href="https://github.com/Simatwa/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Github&message=Passing&logo=github&color=green" alt="Github"/></a>
-<a href="https://pypi.org/project/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Pypi&message=v1.8.7&color=yellow&logo=pypi" alt="pypi"/></a>
+<a href="https://pypi.org/project/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Pypi&message=v1.8.8&color=yellow&logo=pypi" alt="pypi"/></a>
 <a href="#"><img src="https://img.shields.io/static/v1?label=Coverage&message=80%&color=lime&logo=Coverage" alt="Coverage"/></a>
 <a href="https://wakatime.com/badge/github/Simatwa/svinf3"><img src="https://wakatime.com/badge/github/Simatwa/svinf3.svg" alt="wakatime"/></a>
 <a href="#"><img src="https://visitor-badge.glitch.me/badge?page_id=Simatwa.tdwnsv3&left_color=red&right_color=lime&left_text=Counts" alt="Visitors"/></a>
@@ -87,7 +86,7 @@ $ python -m tdwnsv3
 Since Flask server runs at development environment, you may need to run the program on a server such as [Nginx](https://nginx.org) for efficiency.
 
 ```py
-from tdwnsv3.file_explorer import app
+from tdwnsv3.tdwnsv3 import app
 
 if __name__ == "__main__":
     app.run()
