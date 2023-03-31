@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-__info__ = "Simple local-files server with security as main priority!"
+__info__ = "Simple local-files server with security on top!"
 __version__ = "1.8.3"
 __author__ = "Smartwa Caleb"
 __email__="smartwacaleb@gmail.com"
