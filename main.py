@@ -111,13 +111,11 @@ def args_handler():
         "-upp",
         "--upload-path",
         help="Path for saving uploaded files",
-        dest="upload_path",
     )
     parser.add_argument(
         "-upe",
         "--upload-extension",
         help="Extensions of files to be uploaded",
-        dest="upload_extension",
     )
     parser.add_argument(
         "-ups",
@@ -125,7 +123,6 @@ def args_handler():
         help="Maximum file size to be uploaded - [MB]",
         default=100,
         type=int,
-        dest="upload_size",
     )
     parser.add_argument(
         "-upl",
@@ -134,13 +131,11 @@ def args_handler():
         type=int,
         default=10,
         metavar="upload_limit",
-        dest="upload_limit_person",
     )
     parser.add_argument(
         "--upload-multiple",
         help="Allow users to upload more than one file at a time.",
-        action="store_true",
-        dest="upload_multiple",
+        action="store_true"
     )
     parser.add_argument(
         "--disable-aggressive",
@@ -150,14 +145,12 @@ def args_handler():
     )
     parser.add_argument(
         "--display-hidden",
-        dest="display_hidden",
         action="store_true",
         help="Show hidden files and directories",
     )
     parser.add_argument("--host", help="Host the files on the LAN", action="store_true")
     parser.add_argument(
         "--no-sort",
-        dest="no_sort",
         help="Disable prettifying the display of contents",
         action="store_true",
     )
@@ -183,7 +176,7 @@ def args_handler():
     )
     parser.add_argument(
         "--no-cache",
-        help="Use currently passed parameters not previously saved",
+        help="Use currently passed parameters not previously saved; content-caching disabled",
         action="store_true",
         dest="no_cache",
     )
@@ -259,7 +252,7 @@ sec_headers = {
     "X-Content-Type-Options": "nosniff",
     "X-Permitted-Cross-Domain-Policies": "none",
     "Content-Security-Policy": "base-uri 'self'; block-all-mixed-content;",
-    "Cache-Control": "no-cache",
+    "Cache-Control": "no-cache" if args.no_cache else 'public',
     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
     "Access-Control-Allow-Credentials": "true",
     "Referrer-Policy": "same-origin",
