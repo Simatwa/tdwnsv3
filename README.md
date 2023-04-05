@@ -24,7 +24,7 @@
 - Web interface with multiple themes
 - Highly secured
 - Multiple device and browser compatible
-- Fully customized web interface - css
+- Fully customizable web interface - css
 - Upload and download files
 
 ## Installation 
