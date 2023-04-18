@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from tdwnsv3 import __info__ , __version__, __author__ , __repo__ , __email__
+from tdwnsv3 import __info__, __version__, __author__, __repo__, __email__
 
 
 def get_file(nm: str) -> list:
@@ -32,8 +32,8 @@ setup(
         "Programming Language :: Python :: 3.11",
     ],
     entry_points={
-        'console_scripts':[
-            'tdwnsv3 = tdwnsv3.tdwnsv3:main',
+        "console_scripts": [
+            "tdwnsv3 = tdwnsv3.tdwnsv3:main",
         ]
-    }
+    },
 )

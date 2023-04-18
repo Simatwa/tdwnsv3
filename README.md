@@ -20,10 +20,11 @@
 
 ## Features
 
-- Simple commandline interface for launch
+- Simple commandline interface
 - Web interface with multiple themes
-- Highly secured
-- Multiple device and browser compatible
+- Serve as static files server - index.html
+- Highly immune against variety of attacks
+- Compatible with multiple devices and browsers
 - Fully customizable web interface - css
 - Upload and download files
 
@@ -101,7 +102,13 @@ $ uwsgi --http=0.0.0.0:8080 -w wsgi:app
 
 ```
 
+<details>
+
+<summary>
+
 - Run  ```tdwnsv3 -h``` to view more configuration info as shown.
+
+</summary>
 
 ```
 
@@ -112,15 +119,15 @@ usage: tdwnsv3 [-h] [-v] [-d DIR] [-a ALLOW] [-r RESTRICT] [-w WHITELIST]
                [-ups UPLOAD_SIZE] [-upl upload_limit] [--upload-multiple]
                [--disable-aggressive] [--display-hidden] [--host] [--no-sort]
                [--view] [--strict] [--preload] [--upload] [--save-css]
-               [--no-cache] [--encrypt] [--debug]
+               [--no-cache] [--encrypt] [--debug] [--index]
                [port]
 
-Simple local-files server with security as main priority!
+Simple local-files server with security on top!
 
 positional arguments:
   port                  Port to be used for hosting files
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
   -d DIR, --dir DIR     Directory to be hosted
@@ -176,9 +183,13 @@ optional arguments:
                         content-caching disabled
   --encrypt             Encrypt URIs on the webpage
   --debug               Debug the web application in UI mode
+  --index               Serve from index.html file
 
 ```
 
+</details>
+
+- Review [CHANGELOG](CHANGELOG.md)
 
 ## Acknowledgements
 

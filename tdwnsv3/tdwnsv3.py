@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import argparse, os
-from . import __info__ , __author__, __version__
+from . import __info__, __author__, __version__
 
 
 def args_handler():
@@ -135,7 +135,7 @@ def args_handler():
     parser.add_argument(
         "--upload-multiple",
         help="Allow users to upload more than one file at a time.",
-        action="store_true"
+        action="store_true",
     )
     parser.add_argument(
         "--disable-aggressive",
@@ -185,6 +185,9 @@ def args_handler():
     )
     parser.add_argument(
         "--debug", help="Debug the web application in UI mode", action="store_true"
+    )
+    parser.add_argument(
+        "--index", action="store_true", help="Serve from index.html file"
     )
     return parser.parse_args()
 
@@ -252,7 +255,7 @@ sec_headers = {
     "X-Content-Type-Options": "nosniff",
     "X-Permitted-Cross-Domain-Policies": "none",
     "Content-Security-Policy": "base-uri 'self'; block-all-mixed-content;",
-    "Cache-Control": "no-cache" if args.no_cache else 'public',
+    "Cache-Control": "no-cache" if args.no_cache else "public",
     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
     "Access-Control-Allow-Credentials": "true",
     "Referrer-Policy": "same-origin",
@@ -287,7 +290,10 @@ encryptor = encryption(encryption_key, args, config)
 
 get_cookie = lambda v: request.cookies.get(v)
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder=dir,
+)
 
 
 def config_app():
@@ -323,8 +329,12 @@ def add_headers(response):
     if response.status_code in (200, 201, 202, 301, 302, 304):
         for key, value in sec_headers.items():
             response.headers[key] = value
-    if response.content_type.split(';')[0] in ('application/json','application/xml','text/html'):
-        response.headers['Cache-Control']='must-revalidate; charset=utf-8'
+    if response.content_type.split(";")[0] in (
+        "application/json",
+        "application/xml",
+        "text/html",
+    ):
+        response.headers["Cache-Control"] = "must-revalidate; charset=utf-8"
     return response
 
 
@@ -543,7 +553,7 @@ def path_handler(path):
             abort(401)
         if os.path.isfile(path1):
             return respond_to_user(send_file(path1))
-        elif os.path.isdir(path1):
+        elif os.path.isdir(path1) and not args.index:
             return respond_to_user(wrap_path(path1, path))
         else:
             if path == "home":
@@ -555,7 +565,13 @@ def path_handler(path):
                 except Exception as e:
                     abort(401)
                 else:
-                    resp = make_response(wrap_path(dir, path))
+                    if args.index:
+                        if os.path.exists(os.path.join(dir, "index.html")):
+                            resp = make_response(render_template("index.html"))
+                        else:
+                            abort(404)
+                    else:
+                        resp = make_response(wrap_path(dir, path))
                     if not has_login():
                         cookie1, cookie2 = add_new_user()
                         resp.set_cookie(
@@ -635,6 +651,7 @@ def upload():
         response_data["code"],
     )
 
+
 def main():
     log.debug("Server configured ready to start!")
     try:
@@ -644,6 +661,7 @@ def main():
             app.run(port=args.port, debug=args.debug)
     except Exception as e:
         log.exception(e)
+
 
 if __name__ == "__main__":
     main()
