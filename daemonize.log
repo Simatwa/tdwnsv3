@@ -1,0 +1,16 @@
+*** Starting uWSGI 2.0.21 (64bit) on [Wed Jun  7 14:14:34 2023] ***
+compiled with version: Android (8490178, based on r450784d) Clang 14.0.6 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6) on 28 December 2022 08:14:23
+os: Linux-4.19.127-g42eb9da3c7cb-dirty #1 SMP PREEMPT Thu Jun 23 22:37:30 CST 2022
+nodename: localhost
+machine: aarch64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /storage/emulated/0/git/tdwnsv3
+detected binary path: /data/data/com.termux/files/usr/bin/uwsgi
+your processes number limit is 14303
+your memory page size is 4096 bytes
+detected max file descriptor number: 32768
+lock engine: pthread mutexes
+thunder lock: enabled
+bind(): No such file or directory [core/socket.c line 230]

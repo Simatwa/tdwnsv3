@@ -1,5 +1,10 @@
 from setuptools import setup, find_packages
-from tdwnsv3 import __info__, __version__, __author__, __repo__, __email__
+
+__info__ = "Simple local-files server with security on top!"
+__version__ = "1.9.1"
+__author__ = "Smartwa Caleb"
+__email__ = "smartwacaleb@gmail.com"
+__repo__ = "https://github.com/Simatwa/tdwnsv3"
 
 
 def get_file(nm: str) -> list:
@@ -16,6 +21,11 @@ setup(
     project_urls={"Bug Report": f"{__repo__}/issues/new"},
     license="MIT",
     author=__author__,
+    install_requires=[
+        "Flask>=2.2.2",
+        "cryptography>=39.0.0",
+        "appdirs>=1.4.4",
+    ],
     author_email=__email__,
     maintainer=__author__,
     maintainer_email=__email__,

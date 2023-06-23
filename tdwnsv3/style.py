@@ -340,6 +340,11 @@ button{
     font-weight: bold;
 }
 
+.dir:hover{
+    background-color:blue;
+    color:white;
+    }
+
 #cp{
     background-color: #fff;
     width: 60%;
@@ -357,6 +362,11 @@ input#cp{
     padding: 10px;
     height: 0.2cm;
 }
+
+input#cp:focus{
+   height:0.8cm;
+   border:1px solid blue;
+ }
 
 .vida,.pic,.aud{
     display: inline-block;
