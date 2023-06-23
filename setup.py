@@ -16,7 +16,6 @@ setup(
     name="tdwnsv3",
     packages=find_packages(),
     version=__version__,
-    install_requires=get_file("requirements.txt"),
     url=__repo__,
     project_urls={"Bug Report": f"{__repo__}/issues/new"},
     license="MIT",
