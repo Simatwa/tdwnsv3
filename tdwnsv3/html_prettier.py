@@ -24,6 +24,20 @@ SOFTWARE.
 import os, urllib, html
 
 
+def make_navigator(dir, home_dir):
+    # dir = "DCIM/Bugjaege/hello"
+    resp = f'<a class="listed_dir" href="/{home_dir}/home">Home</a>'
+    splitted = dir.split("/")
+    for x in range(len(splitted)):
+        if len(splitted) == 1 or not bool(splitted[x].strip()):
+            break
+        url = os.path.join(*["/" + home_dir] + splitted[: x + 1])
+        resp = resp + "/" + f'<a class="listed_dir" href="{url}/">{splitted[x]}</a>'
+    return resp
+
+
+# out = make_navigator("","files")
+# print(out)
 def prettify(
     contents: list, path: str, dir: str, args: object, config: dict, encryptor: object
 ) -> str:
@@ -60,7 +74,7 @@ def prettify(
         f'<script type="text/javascript" src="/{static}/javascript/script.js"></script>'
     )
     r.append("<title>Directory %s</title></head>" % dir)
-    r.append("<body><h1>%s</h1><hr/>" % title)
+    r.append("<body><p class='nav'>%s</p;><hr/>" % make_navigator(dir, config["home"]))
 
     preload = "none"
     if args.preload:
