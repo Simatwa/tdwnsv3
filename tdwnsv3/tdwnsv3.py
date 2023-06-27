@@ -102,9 +102,9 @@ def args_handler():
         "--theme",
         help="Theme for displaying contents",
         type=int,
-        choices=[1, 2, 3],
-        metavar="[1-3]",
-        default=3,
+        choices=[1, 2, 3, 4],
+        metavar="[1-4]",
+        default=4,
     )
     parser.add_argument("-cs", "--css", help="Customize webpage with the CSS in path")
     parser.add_argument(
