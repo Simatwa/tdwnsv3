@@ -1,12 +1,12 @@
 <h1 align="center">tdwnsv3</h1>
-<div align="center"><a href="https://github.com/Simatwa/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Github&message=Passing&logo=github&color=green" alt="Github"/></a>
-<a href="https://pypi.org/project/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Pypi&message=v1.9.1&color=yellow&logo=pypi" alt="pypi"/></a>
+<p align="center"><a href="https://github.com/Simatwa/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Github&message=Passing&logo=github&color=green" alt="Github"/></a>
+<a href="https://pypi.org/project/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Pypi&message=v1.9.2&color=yellow&logo=pypi" alt="pypi"/></a>
 <a href="#"><img src="https://img.shields.io/static/v1?label=Coverage&message=80%&color=lime&logo=Coverage" alt="Coverage"/></a>
 <a href="https://wakatime.com/badge/github/Simatwa/svinf3"><img src="https://wakatime.com/badge/github/Simatwa/svinf3.svg" alt="wakatime"/></a>
 <a href="https://pepy.tech/project/tdwnsv3"><img src="https://static.pepy.tech/badge/tdwnsv3" alt="Downloads"/></a>
 <a href="#"><img src="https://visitor-badge.glitch.me/badge?page_id=Simatwa.tdwnsv3&left_color=red&right_color=lime&left_text=Counts" alt="Visitors"/></a>
 <a href="#"><img src="https://img.shields.io/static/v1?label=Code Style&message=Black&color=black&logo=Black" alt="Code-style"/></a>
-</div>
+</p>
 
 > Access your files on the web.
 
