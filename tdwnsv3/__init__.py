@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 __info__ = "Simple local-files server with security on top!"
-__version__ = "1.9.2"
+__version__ = "1.9.3"
 __author__ = "Smartwa Caleb"
 __email__ = "smartwacaleb@gmail.com"
 __repo__ = "https://github.com/Simatwa/tdwnsv3"
