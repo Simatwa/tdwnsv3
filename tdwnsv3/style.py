@@ -630,6 +630,14 @@ marquee{
     color:#222;
 }
 
+.admin_login{
+   margin-down:1px;
+   border-radius:4px;
+   background-color:lime;
+   color:gray;
+   padding:6px;
+}
+
 footer{
   /*  position: fixed; */
     bottom: 0;

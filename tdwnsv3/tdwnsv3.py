@@ -133,6 +133,21 @@ def args_handler():
         metavar="upload_limit",
     )
     parser.add_argument(
+        "--swatch",
+        help="Flask-Admin display swatch (Theme) name listed at http://bootswatch.com/3/",
+        default="cerulean",
+    )
+    parser.add_argument(
+        "--template",
+        help="Flask-Admin template to be used - %(default)s",
+        default="bootstrap3",
+    )
+    parser.add_argument(
+        "--admin",
+        help="Enable admin view for managing entries - %(default)s",
+        action="store_true",
+    )
+    parser.add_argument(
         "--upload-multiple",
         help="Allow users to upload more than one file at a time.",
         action="store_true",
@@ -297,6 +312,7 @@ app = Flask(
 
 
 def config_app():
+    app.config["SECRET_KEY"] = new_cookie(14)
     if args.upload_path:
         if os.path.isdir(args.upload_path):
             pth = args.upload_path
@@ -654,6 +670,11 @@ def upload():
 
 def main():
     log.debug("Server configured ready to start!")
+    if args.admin:
+        from .admin import AdminEndpoint
+
+        global app
+        app = AdminEndpoint(dir, args, app)
     try:
         if args.host:
             app.run(host="0.0.0.0", port=args.port, debug=args.debug, threaded=True)

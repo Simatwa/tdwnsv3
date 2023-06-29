@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 __info__ = "Simple local-files server with security on top!"
-__version__ = "1.9.2"
+__version__ = "1.9.3"
 __author__ = "Smartwa Caleb"
 __email__ = "smartwacaleb@gmail.com"
 __repo__ = "https://github.com/Simatwa/tdwnsv3"
@@ -24,6 +24,7 @@ setup(
         "Flask>=2.2.2",
         "cryptography>=39.0.0",
         "appdirs>=1.4.4",
+        "Flask-Admin==1.6.1",
     ],
     author_email=__email__,
     maintainer=__author__,

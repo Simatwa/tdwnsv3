@@ -224,7 +224,8 @@ def prettify(
         else ""
     )
     r.append(
-        """<hr><div class="container"><footer>
+        f"""<hr><div class="container"><footer>
+        { '<a class="admin_login" href="/admin/fileadmin">Manage Files</a><br><br>' if args.admin else ''} 
 		 <a class='but' href='#' target='self' onclick='refresh()'>Refresh Page</a>
         <p style="color:red;font-size:160%;font-family:cursive;">Regards <a href='https://github.com/Simatwa' target='_blank'>Smartwa</a></p></footer></div>
        """
