@@ -1,6 +1,6 @@
 <h1 align="center">tdwnsv3</h1>
 <p align="center"><a href="https://github.com/Simatwa/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Github&message=Passing&logo=github&color=green" alt="Github"/></a>
-<a href="https://pypi.org/project/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Pypi&message=v1.9.2&color=yellow&logo=pypi" alt="pypi"/></a>
+<a href="https://pypi.org/project/tdwnsv3"><img src="https://img.shields.io/static/v1?label=Pypi&message=v1.9.3&color=yellow&logo=pypi" alt="pypi"/></a>
 <a href="#"><img src="https://img.shields.io/static/v1?label=Coverage&message=80%&color=lime&logo=Coverage" alt="Coverage"/></a>
 <a href="https://wakatime.com/badge/github/Simatwa/svinf3"><img src="https://wakatime.com/badge/github/Simatwa/svinf3.svg" alt="wakatime"/></a>
 <a href="https://pepy.tech/project/tdwnsv3"><img src="https://static.pepy.tech/badge/tdwnsv3" alt="Downloads"/></a>
@@ -27,6 +27,7 @@
 - Compatible with multiple devices and browsers
 - Fully customizable web interface - css
 - Upload and download files
+- Delete multiple files with a click
 
 ## Installation 
 
